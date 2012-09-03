@@ -29,6 +29,7 @@ root_pw = String.new
 
 search(:apps) do |app|
   app = Chef::EncryptedDataBagItem.load('apps', app['id'])
+  Chef::Log.info(app)
   (app['database_master_role'] & node.run_list.roles).each do |dbm_role|
     %w{ root repl debian }.each do |user|
       user_pw = app["mysql_#{user}_password"]
