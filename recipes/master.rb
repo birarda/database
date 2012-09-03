@@ -28,6 +28,7 @@ db_info = Hash.new
 root_pw = String.new
 
 search(:apps) do |app|
+  app = Chef::EncryptedDataBagItem.load('apps', app['id'])
   (app['database_master_role'] & node.run_list.roles).each do |dbm_role|
     %w{ root repl debian }.each do |user|
       user_pw = app["mysql_#{user}_password"]
@@ -55,6 +56,7 @@ include_recipe "mysql::server"
 connection_info = {:host => "localhost", :username => 'root', :password => node['mysql']['server_root_password']}
 
 search(:apps) do |app|
+  app = Chef::EncryptedDataBagItem.load('apps', app['id'])
   (app['database_master_role'] & node.run_list.roles).each do |dbm_role|
     app['databases'].each do |env,db|
       if env =~ /#{node.chef_environment}/
