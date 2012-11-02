@@ -24,10 +24,6 @@
 # the root, repl, and debian-sys-maint users.
 #
 
-package 'build-essential' do
-  action :install
-end
-
 db_info = Hash.new
 root_pw = String.new
 
