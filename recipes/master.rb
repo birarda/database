@@ -53,12 +53,6 @@ end
 
 include_recipe "mysql::server"
 
-# the mysql gem is going to be used below to create a database
-# so we should probably make sure chef has it first?
-chef_gem 'mysql' do
-  action :install
-end
-
 connection_info = {:host => "localhost", :username => 'root', :password => node['mysql']['server_root_password']}
 
 search(:apps) do |app|
