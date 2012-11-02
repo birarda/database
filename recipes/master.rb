@@ -24,6 +24,8 @@
 # the root, repl, and debian-sys-maint users.
 #
 
+gem_package 'mysql'
+
 db_info = Hash.new
 root_pw = String.new
 
