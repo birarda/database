@@ -24,8 +24,6 @@
 # the root, repl, and debian-sys-maint users.
 #
 
-gem_package 'mysql'
-
 db_info = Hash.new
 root_pw = String.new
 
@@ -55,6 +53,7 @@ end
 
 include_recipe "mysql::server"
 
+gem_package 'mysql'
 connection_info = {:host => "localhost", :username => 'root', :password => node['mysql']['server_root_password']}
 
 search(:apps) do |app|
